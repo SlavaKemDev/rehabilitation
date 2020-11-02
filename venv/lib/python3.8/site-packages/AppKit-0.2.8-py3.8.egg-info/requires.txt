@@ -1,0 +1,3 @@
+flask
+pygobject
+beautifulsoup4
