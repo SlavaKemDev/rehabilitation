@@ -38,6 +38,8 @@ class LinearFunction:
 
 class Straight(LinearFunction):
     def __init__(self, point1, point2):
+        self.point1 = point1
+        self.point2 = point2
         deltaX = point1.x - point2.x
         deltaY = point1.y - point2.y
         k = deltaX / deltaY
@@ -68,6 +70,16 @@ class Segment(Straight):
         else:
             self.min = point2.x
             self.max = point1.x
+
+    def get_center_point(self) -> Point:
+        x1 = self.point1.x
+        y1 = self.point1.y
+        x2 = self.point2.x
+        y2 = self.point2.y
+        delta_x = x1 - x2
+        delta_y = y1 - y2
+        point = Point(x1 - (delta_x / 2), y1 - (delta_y / 2))
+        return point
 
 
 class Ray(Straight):

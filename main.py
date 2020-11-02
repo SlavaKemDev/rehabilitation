@@ -8,7 +8,7 @@ import numpy
 import time
 import threading
 import shutil
-
+from SymmetryEngine import SymmetryEngine
 
 def play_sound(file):
     a = 1
@@ -32,6 +32,7 @@ except:
     a = 1
 window_name = "Rehabilitation testing"
 fd = FaceDetector()
+se = SymmetryEngine()
 cam = Camera(10)
 imageCount = 60
 tasks = ("smile")
@@ -99,8 +100,8 @@ for i in range(allFrames):
     face_array, image = fd.detect(frame)
     if face_array is None:
         continue
-    mouth_img = fd.detect_mouth(face_array, frame)
-    cv2.imwrite(f"mouth/mouth{i}.png", mouth_img)
+    se.set_face_array(face_array)
+    se.get_symmetry()
     left_border = Point(
         face_array["landmarks"][48][0],
         face_array["landmarks"][48][1]
