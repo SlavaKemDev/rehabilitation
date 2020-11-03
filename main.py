@@ -98,6 +98,8 @@ for i in range(allFrames):
     exc = exercises[exerciseNumber]
     frame = cv2.imread(f"frames/frame{i}.png")
     face_array, image = fd.detect(frame)
+    mouth = fd.detect_mouth(face_array, frame)
+    cv2.imwrite(f"mouth/mouth{i}.png", mouth)
     if face_array is None:
         continue
     se.set_face_array(face_array)

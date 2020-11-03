@@ -29,7 +29,7 @@ class SymmetryEngine:
                                                 Point(landmarks[12][0], landmarks[12][1]))
         cross2, ratio2 = self.get_crossing_data(Point(landmarks[48][0], landmarks[48][1]),
                                                 Point(landmarks[54][0], landmarks[54][1]))
-        print("Анализ симметрии:")
+        print("\nАнализ симметрии:")
         print(f"Отношение 1 пары точек: {ratio1},")
         print(f"Отношение 2 пары точек: {ratio2}\n")
 

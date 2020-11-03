@@ -60,7 +60,7 @@ class FaceDetector:
         x_right = int(right_edge.x + abs(right_edge.x - left_edge.x) * 0.4)
         mouth_img = cv2.cvtColor(image[y_top:y_bottom, x_left:x_right], cv2.COLOR_BGR2GRAY)
         height, width = mouth_img.shape
-        '''pixels_count = float(width * height)
+        pixels_count = float(width * height)
         average_color = float(0)
         for y in range(height):
             for x in range(width):
@@ -68,9 +68,8 @@ class FaceDetector:
         for y in range(height):
             for x in range(width):
                 pixel = mouth_img[y, x]
-                if pixel < average_color - 20 or pixel > average_color + 20:
+                if pixel < average_color - 40 or pixel > average_color - 10:
                     mouth_img[y, x] = 255
                 else:
                     mouth_img[y, x] = 0
-'''
         return mouth_img

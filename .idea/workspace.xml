@@ -3,35 +3,35 @@
   <component name="ChangeListManager">
     <list default="true" id="f6da44a7-f55c-452b-b498-61756ec00df6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Geometry2D.py" beforeDir="false" afterPath="$PROJECT_DIR$/Geometry2D.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FaceDetector.py" beforeDir="false" afterPath="$PROJECT_DIR$/FaceDetector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SymmetryEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/SymmetryEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame0.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame1.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame10.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame11.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame12.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame13.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame14.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame14.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame15.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame16.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame17.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame17.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame18.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame19.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame2.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame20.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame21.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame22.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame22.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame23.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame23.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame24.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame24.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame25.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame3.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame4.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame5.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame6.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame7.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame8.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frames/frame9.png" beforeDir="false" afterPath="$PROJECT_DIR$/frames/frame9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mouth/mouth9.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,38 +130,38 @@
       <screen x="0" y="23" width="1440" height="821" />
     </state>
     <state x="447" y="242" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.821@0.23.1440.821" timestamp="1603702705910" />
-    <state width="1419" height="210" key="GridCell.Tab.0.bottom" timestamp="1604304546598">
-      <screen x="0" y="23" width="1440" height="820" />
+    <state width="1419" height="210" key="GridCell.Tab.0.bottom" timestamp="1604371539582">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.820@0.23.1440.820" timestamp="1604304546598" />
     <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.821@0.23.1440.821" timestamp="1604301592899" />
     <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.822@0.23.1440.822" timestamp="1603703444304" />
-    <state width="1419" height="212" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1603461390285" />
-    <state width="1419" height="212" key="GridCell.Tab.0.bottom/0.23.1440.825@0.23.1440.825" timestamp="1603461791957" />
-    <state width="1419" height="210" key="GridCell.Tab.0.center" timestamp="1604304546597">
-      <screen x="0" y="23" width="1440" height="820" />
+    <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1604371539582" />
+    <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.825@0.23.1440.825" timestamp="1604323831950" />
+    <state width="1419" height="210" key="GridCell.Tab.0.center" timestamp="1604371539582">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.820@0.23.1440.820" timestamp="1604304546597" />
     <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.821@0.23.1440.821" timestamp="1604301592898" />
     <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.822@0.23.1440.822" timestamp="1603703444302" />
-    <state width="1419" height="212" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1603461390284" />
-    <state width="1419" height="212" key="GridCell.Tab.0.center/0.23.1440.825@0.23.1440.825" timestamp="1603461791956" />
-    <state width="1419" height="210" key="GridCell.Tab.0.left" timestamp="1604304546597">
-      <screen x="0" y="23" width="1440" height="820" />
+    <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1604371539582" />
+    <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.825@0.23.1440.825" timestamp="1604323831949" />
+    <state width="1419" height="210" key="GridCell.Tab.0.left" timestamp="1604371539581">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.820@0.23.1440.820" timestamp="1604304546597" />
     <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.821@0.23.1440.821" timestamp="1604301592897" />
     <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.822@0.23.1440.822" timestamp="1603703444300" />
-    <state width="1419" height="212" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1603461390283" />
-    <state width="1419" height="212" key="GridCell.Tab.0.left/0.23.1440.825@0.23.1440.825" timestamp="1603461791956" />
-    <state width="1419" height="210" key="GridCell.Tab.0.right" timestamp="1604304546598">
-      <screen x="0" y="23" width="1440" height="820" />
+    <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1604371539581" />
+    <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.825@0.23.1440.825" timestamp="1604323831949" />
+    <state width="1419" height="210" key="GridCell.Tab.0.right" timestamp="1604371539582">
+      <screen x="0" y="23" width="1440" height="823" />
     </state>
     <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.820@0.23.1440.820" timestamp="1604304546598" />
     <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.821@0.23.1440.821" timestamp="1604301592899" />
     <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.822@0.23.1440.822" timestamp="1603703444303" />
-    <state width="1419" height="212" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1603461390284" />
-    <state width="1419" height="212" key="GridCell.Tab.0.right/0.23.1440.825@0.23.1440.825" timestamp="1603461791957" />
+    <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1604371539582" />
+    <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.825@0.23.1440.825" timestamp="1604323831950" />
     <state width="1419" height="262" key="GridCell.Tab.1.bottom" timestamp="1604284361326">
       <screen x="0" y="23" width="1440" height="820" />
     </state>
