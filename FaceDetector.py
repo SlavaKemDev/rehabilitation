@@ -65,6 +65,32 @@ class FaceDetector:
         for y in range(height):
             for x in range(width):
                 average_color += float(mouth_img[y, x]) / pixels_count
+
+        half_width = width / 2
+        half_height = height / 2
+        top_point = Point(half_width, 0)
+        bottom_point = Point(half_width, height)
+        left_point = Point(0, half_height)
+        right_point = Point(width, half_height)
+        segment1 = Segment(top_point, right_point)
+        segment2 = Segment(top_point, left_point)
+        segment3 = Segment(left_point, bottom_point)
+        segment4 = Segment(right_point, bottom_point)
+        for y in range(height):
+            for x in range(width):
+                point = Point(x, y)
+                if x > half_width:
+                    if y > half_height:
+                        # 4th quater
+                    else:
+                        # 1st quater
+                        second_point = Point(x, y - 1)
+                        ray = Ray(point, second_point)
+                else:
+                    if y > half_height:
+                        # 3rd quater
+                    else:
+                        # 2nd quater
         for y in range(height):
             for x in range(width):
                 pixel = mouth_img[y, x]

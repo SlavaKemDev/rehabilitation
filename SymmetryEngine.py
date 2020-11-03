@@ -1,7 +1,6 @@
 from Geometry2D import *
 import cv2
 
-
 class SymmetryEngine:
 
     def set_face_array(self, face_array):
