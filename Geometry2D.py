@@ -1,11 +1,14 @@
 import numpy
 import math
 
+
 class Point:
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
 
+    def position(self):
+        return self.x, self.y
 
 class LinearFunction:
     def __init__(self, k: float, b: float):
@@ -94,7 +97,11 @@ class Ray(Straight):
 
 class Triangle:
     def __init__(self, point1: Point, point2: Point, point3: Point):
-        #sides
+        # points
+        self.point1 = point1
+        self.point2 = point2
+        self.point3 = point3
+        # sides
         self.a_segment = Segment(point1, point2)
         self.b_segment = Segment(point2, point3)
         self.c_segment = Segment(point3, point1)
@@ -102,7 +109,7 @@ class Triangle:
         a = self.a_segment.length
         b = self.b_segment.length
         c = self.c_segment.length
-        #angles
+        # angles
         self.alpha_angle = math.acos(
             (a ** 2 + c ** 2 - b ** 2) / (2 * a * c)
         )
@@ -112,6 +119,18 @@ class Triangle:
         self.gamma_angle = math.acos(
             (b ** 2 + c ** 2 - a ** 2) / (2 * c * b)
         )
+
+    def check_collusion(self, obj):
+        if type(obj) == Point:
+            point1 = self.point1
+            point2 = self.point2
+            point3 = self.point3
+            area_orig = abs(
+                (point2.x - point1.x) * (point3.y - point1.y) - (point3.x - point1.x) * (point2.y - point1.y))
+            area1 = abs((point1.x - obj.x) * (point2.y - obj.y) - (point2.x - obj.x) * (point1.y - obj.y))
+            area2 = abs((point2.x - obj.x) * (point3.y - obj.y) - (point3.x - obj.x) * (point2.y - obj.y))
+            area3 = abs((point3.x - obj.x) * (point1.y - obj.y) - (point1.x - obj.x) * (point3.y - obj.y))
+            return area1 + area2 + area3 == area_orig
 
 
 class Geometry2D:
