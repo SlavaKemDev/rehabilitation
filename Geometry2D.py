@@ -17,6 +17,19 @@ class LinearFunction:
         self.min = float("-inf")
         self.max = float("inf")
 
+    def getX(self, y: float):
+        x = (y - self.b) / self.k
+        if x < self.min or x > self.max:
+            return None
+        else:
+            return x
+
+    def getY(self, x: float):
+        if x < self.min or x > self.max:
+            return None
+        else:
+            return self.k * x + self.b
+
     def getCrossing(self, function) -> Point:
         k1 = self.k
         b1 = self.b

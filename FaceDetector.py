@@ -11,6 +11,60 @@ class FaceDetector:
         self.landmark_detector = cv2.face.createFacemarkLBF()
         self.landmark_detector.loadModel("cascades/lbf_model.yaml")
 
+    def fill_color(self, image, to_color, position):
+        pos_y = position[0]
+        pos_x = position[1]
+        from_color = image[pos_y, pos_x]
+        image[pos_y, pos_x] = to_color
+        tasks = [position]
+        print(from_color, to_color, position, tasks)
+        while len(tasks) > 0:
+            pos = tasks.pop(0)
+            pos_y = pos[0]
+            pos_x = pos[1]
+            try:
+                if image[pos_y - 1, pos_x] == from_color:
+                    image[pos_y - 1, pos_x] = to_color
+                    tasks.append((pos_y - 1, pos_x))
+            except:
+                pass
+            try:
+                if image[pos_y, pos_x + 1] == from_color:
+                    image[pos_y, pos_x + 1] = to_color
+                    tasks.append((pos_y, pos_x + 1))
+            except:
+                pass
+            try:
+                if image[pos_y + 1, pos_x] == from_color:
+                    image[pos_y + 1, pos_x] = to_color
+                    tasks.append((pos_y + 1, pos_x))
+            except:
+                pass
+            try:
+                if image[pos_y, pos_x - 1] == from_color:
+                    image[pos_y, pos_x - 1] = to_color
+                    tasks.append((pos_y, pos_x - 1))
+            except:
+                pass
+
+    def has_same_pixel(self, image, position, direction):
+        try:
+            pos_y = position[0]
+            pos_x = position[1]
+            color = image[pos_y, pos_x]
+            if direction == "top":
+                pos_y -= 1
+            elif direction == "bottom":
+                pos_y += 1
+            elif direction == "left":
+                pos_x -= 1
+            elif direction == "right":
+                pos_x += 1
+            new_color = image[pos_y, pos_x]
+            return color == new_color
+        except:
+            return False
+
     def detect(self, filename):
         if type(filename) == str:
             image = cv2.imread(filename)
@@ -50,6 +104,8 @@ class FaceDetector:
             return face_array, image
 
     def detect_mouth(self, face_array, image):
+        if face_array is None:
+            return image
         left_edge = Point(face_array["landmarks"][48][0], face_array["landmarks"][48][1])
         right_edge = Point(face_array["landmarks"][54][0], face_array["landmarks"][54][1])
         top_edge = Point(face_array["landmarks"][51][0], face_array["landmarks"][51][1])
@@ -80,13 +136,101 @@ class FaceDetector:
         for y in range(height):
             for x in range(width):
                 pixel = mouth_img[y, x]
-                if pixel < average_color - 40 or pixel > average_color - 10:
+                if pixel < average_color - 40 or pixel > average_color - 10:  # -40 -10
                     mouth_img[y, x] = 255
                 else:
-                    mouth_img[y, x] = 0
-
+                    mouth_img[y, x] = 191
+        x_start = round(half_width)
+        y_start = round(half_height)
+        if half_width < half_height:
+            iterations = x_start
+        else:
+            iterations = y_start
+        final_pos = (0, 0)
+        for i in range(iterations):
+            try:
+                if mouth_img[y_start - i, x_start] == 191:
+                    final_pos = (y_start - i, x_start)
+                    break
+            except:
+                pass
+            '''try:
+                if mouth_img[y_start - i, x_start + i] == 191:
+                    final_pos = (y_start - i, x_start + i)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start, x_start + i] == 191:
+                    final_pos = (y_start, x_start + i)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start + i, x_start + i] == 191:
+                    final_pos = (y_start + i, x_start + i)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start + i, x_start] == 191:
+                    final_pos = (y_start + i, x_start)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start + i, x_start - i] == 191:
+                    final_pos = (y_start + i, x_start - i)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start, x_start - i] == 191:
+                    final_pos = (y_start, x_start - i)
+                    break
+            except:
+                pass
+            try:
+                if mouth_img[y_start - i, x_start - i] == 191:
+                    final_pos = (y_start - i, x_start - i)
+                    break
+            except:
+                pass'''
+        print(final_pos)
+        self.fill_color(mouth_img, 127, final_pos)
+        copy_mouth = mouth_img.copy()
+        mouth_top_point = None
+        mouth_bottom_point = None
+        mouth_left_point = None
+        mouth_right_point = None
+        for y in range(height):
+            for x in range(width):
+                bottom_y = height - 1 - y
+                if not self.has_same_pixel(copy_mouth, (y, x), "top") and mouth_img[y, x] == 127:
+                    mouth_img[y, x] = 63
+                    if mouth_top_point is None:
+                        mouth_top_point = (x, y)
+                        cv2.circle(mouth_img, mouth_top_point, 3, 0)
+                if not self.has_same_pixel(copy_mouth, (bottom_y, x), "bottom") and mouth_img[bottom_y, x] == 127:
+                    mouth_img[bottom_y, x] = 63
+                    if mouth_bottom_point is None:
+                        mouth_bottom_point = (x, bottom_y)
+                        cv2.circle(mouth_img, mouth_bottom_point, 3, 0)
+        for x in range(width):
+            for y in range(height):
+                right_x = width - 1 - x
+                if not self.has_same_pixel(copy_mouth, (y, x), "left") and mouth_img[y, x] == 127:
+                    mouth_img[y, x] = 63
+                    if mouth_left_point is None:
+                        mouth_left_point = (x, y)
+                        cv2.circle(mouth_img, mouth_left_point, 3, 0)
+                if not self.has_same_pixel(copy_mouth, (y, right_x), "right") and mouth_img[y, right_x] == 127:
+                    mouth_img[y, right_x] = 63
+                    if mouth_right_point is None:
+                        mouth_right_point = (right_x, y)
+                        cv2.circle(mouth_img, mouth_right_point, 3, 0)
         # 1st quarter
-        vertices = numpy.array(
+        '''vertices = numpy.array(
             [[top_point.x, top_point.y], [top_right_point.x, top_right_point.y], [right_point.x, right_point.y / 2]],
             numpy.int32)
         pts = vertices.reshape((-1, 1, 2))
@@ -101,7 +245,7 @@ class FaceDetector:
         cv2.polylines(mouth_img, [pts], isClosed=True, color=255, thickness=20)
         cv2.fillPoly(mouth_img, [pts], color=255)
 
-        '''cv2.drawContours(image, [numpy.ndarray([top_point.position(), top_left_point.position(), left_point.position()])], 0, 255, -1)
+        cv2.drawContours(image, [numpy.ndarray([top_point.position(), top_left_point.position(), left_point.position()])], 0, 255, -1)
         cv2.drawContours(image, [numpy.ndarray([bottom_point.position(), bottom_left_point.position(), left_point.position()])], 0, 255, -1)
         cv2.drawContours(image, [numpy.ndarray([bottom_point.position(), bottom_right_point.position(), right_point.position()])], 0, 255, -1)'''
-        return mouth_img
+        return mouth_img, [Point(x_left, y_top), Point(x_right, y_bottom)]

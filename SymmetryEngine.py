@@ -47,3 +47,66 @@ class SymmetryEngine:
         else:
             ratio = length1 / length2
         return cross_point, ratio
+
+    def get_mouth_symmetry(self, mouth_img, points):
+        self.create_symmetry_axis()
+
+        left_top_point = points[0]
+        right_bottom_point = points[1]
+
+        y_line_1 = left_top_point.y
+        x_line_1 = self.axis.getX(y_line_1)
+
+        y_line_2 = right_bottom_point.y
+        x_line_2 = self.axis.getX(y_line_2)
+
+        if x_line_1 is None or x_line_2 is None:  # если ось симмтерии не проходит через область рта
+            return 0
+
+        height, width = mouth_img.shape[:2]
+        y_line_1 -= left_top_point.y
+        x_line_1 -= left_top_point.x
+
+        y_line_2 -= left_top_point.y
+        x_line_2 -= left_top_point.x
+
+        left_top_point = Point(x_line_1, y_line_1)
+        right_bottom_point = Point(x_line_2, y_line_2)
+
+        axis = Straight(left_top_point, right_bottom_point)
+
+        delta_y = y_line_2 - y_line_1
+
+        output_list = []
+
+        max_fault = math.ceil(width * 0.2)
+
+        for y in range(delta_y):
+            x = round(axis.getX(y))
+            if width - x > x:
+                ranges = width - x
+            else:
+                ranges = x
+
+            left_length = None
+            right_length = None
+            for i in range(1, ranges + 1):
+                x1 = x - i
+                x2 = x + i
+                # сравнение слева
+                if 0 <= x1 < width:  # только если x не пересекает границу слева
+                    if mouth_img[y, x1] == 63:  # если это пиксель обводки
+                        left_length = i  # длина до пикселя
+
+                # сравнение справа
+                if 0 <= x2 < width:  # только если x не пересекает границу справа
+                    if mouth_img[y, x2] == 63:  # если это пиксель обводки
+                        right_length = i  # длина до пикселя
+
+            if left_length is None and right_length is None:  # если нет точки ни слева, ни справа
+                continue  # то, скорее всего тут ничего и недолжно быть, идём дальше
+            elif left_length is None or right_length is None:  # если нет точки либо слева, либо справа
+                output_list.append(False)  # то непорядок, сравнение не пройдено
+            else:  # если обе точки на месте
+                output_list.append(abs(left_length - right_length) <= max_fault)
+        return output_list.count(True) / len(output_list) > 0.4

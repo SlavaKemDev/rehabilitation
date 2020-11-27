@@ -4,11 +4,23 @@ from FaceDetector import FaceDetector
 import os
 import sys
 from Geometry2D import *
-import numpy
 import time
 import threading
 import shutil
+import time
 from SymmetryEngine import SymmetryEngine
+
+def do_exc():
+    print("До начала выполнения 3", end="\r")
+    time.sleep(1)
+    print("До начала выполнения 2", end="\r")
+    time.sleep(1)
+    print("До начала выполнения 1", end="\r")
+    time.sleep(1)
+    print("Сделайте губы трубочкой")
+    time.sleep(5)
+    print("Оставьте губы в том же положении, но подуйте")
+    time.sleep(5)
 
 def play_sound(file):
     a = 1
@@ -30,6 +42,7 @@ try:
     os.mkdir("mouth")
 except:
     a = 1
+
 window_name = "Rehabilitation testing"
 fd = FaceDetector()
 se = SymmetryEngine()
@@ -58,7 +71,7 @@ exercises = [
     {
         "name": "a letter",
         "text": "Say \"A\"",
-        "time": 3
+        "time": 5
     }
 ]
 exerciseNumber = 0
@@ -66,6 +79,7 @@ exerciseFrames = 0
 allFrames = 0
 lastTime = time.time() - 0.51
 keep_going = True
+prev_sign = ""
 while keep_going:
     ret, frame = cap.read()
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -74,6 +88,9 @@ while keep_going:
     outFrame = cv2.flip(outFrame, 1)
     exc = exercises[exerciseNumber]
     cv2.putText(outFrame, exc["text"], (5, 45), cv2.FONT_HERSHEY_PLAIN, 4, (0, 0, 0))
+    if exc["text"] != prev_sign:
+        print(exc["text"])
+        prev_sign = exc["text"]
     if time.time() >= lastTime + 1 / fps:
         # out.write(frame)
         cv2.imwrite(f"frames/frame{allFrames}.png", frame)
@@ -88,22 +105,30 @@ while keep_going:
                 exerciseNumber += 1
             else:
                 keep_going = False
-    cv2.imshow(window_name, outFrame)
+    #white_rect = numpy.ones(outFrame.shape, dtype=numpy.uint8) * 255
+    #outFrame = cv2.addWeighted(outFrame, 0.9, white_rect, 0.9, 1.0)
+    '''cv2.imshow(window_name, outFrame)
     if exerciseNumber == 0 and exerciseFrames == 1:
-        cv2.moveWindow(window_name, 0, 0)
+        cv2.moveWindow(window_name, 0, 0)'''
+print("OK")
 cap.release()
 exerciseNumber = 0
 exerciseFrames = 0
+mouth_data = []
 for i in range(allFrames):
     exc = exercises[exerciseNumber]
     frame = cv2.imread(f"frames/frame{i}.png")
     face_array, image = fd.detect(frame)
-    mouth = fd.detect_mouth(face_array, frame)
-    cv2.imwrite(f"mouth/mouth{i}.png", mouth)
     if face_array is None:
+        mouth_data.append(False)
         continue
     se.set_face_array(face_array)
     se.get_symmetry()
+    mouth, points = fd.detect_mouth(face_array, frame)
+    cv2.imwrite(f"mouth/mouth{i}.png", mouth)
+    mouth_symmetry = se.get_mouth_symmetry(mouth, points)
+    mouth_data.append(mouth_symmetry)
+    print("Рот: ", mouth_symmetry)
     left_border = Point(
         face_array["landmarks"][48][0],
         face_array["landmarks"][48][1]
@@ -133,7 +158,9 @@ for i in range(allFrames):
                 (0, 0, 0))
     cv2.putText(image, "Gamma: " + str(triangle.gamma_angle / math.pi * 180), (5, 60), cv2.FONT_HERSHEY_PLAIN, 1,
                 (0, 0, 0))
-    cv2.putText(image, "Exercise: " + exc["name"], (5, 75), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 0))
+    cv2.putText(image, "Mouth: " + "yes" if mouth_symmetry else "error" + "%", (5, 75), cv2.FONT_HERSHEY_PLAIN, 1,
+                (0, 0, 0))
+    cv2.putText(image, "Exercise: " + exc["name"], (5, 90), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 0))
     cv2.imwrite(f"frames/frame{i}.png", image)
     exerciseFrames += 1
     maxFrames = exc["time"] * fps
@@ -142,4 +169,20 @@ for i in range(allFrames):
             exerciseFrames = 0
             exerciseNumber += 1
 sys.stdout.write(f"\rОбработка 100.0%: завершено\n")
+mouth_result = mouth_data.count(True) / len(mouth_data)
+print(f"Рот: {round(mouth_result * 10000) / 100} %")
 print("Результаты сохранены в папку frames")
+
+
+if mouth_result <= 0.2:
+    print("Вам необходиимо выполнить профилактические упражнения")
+elif mouth_result <= 0.4:
+    print("Вам настоятельно рекомендуется выполнить профилактические упражнения")
+elif mouth_result <= 0.6:
+    print("Вам рекомендуется выполнить профилактические упражнения")
+elif mouth_result <= 0.8:
+    print("Вам было бы неплохо выполнить профилактические упражнения")
+else:
+    print("На вашем лице не обраружно искажений")
+
+do_exc()
