@@ -93,15 +93,20 @@ class FaceDetector:
                 "rectangle": face_final.tolist(),
                 "landmarks": []
             }
+            lmn = 0
             for landmark in landmarks:
                 for x, y in landmark[0]:
                     cv2.circle(image, (int(x), int(y)), 2, (255, 255, 255))
+                    cv2.putText(image, str(lmn), (x, y),
+                                cv2.FONT_HERSHEY_PLAIN, 0.8,
+                                (63, 63, 63) if lmn % 2 == 0 else (0, 0, 0))
                     face_array["landmarks"].append([x, y])
+                    lmn += 1
         if type(filename) == str:
             cv2.imwrite(filename, image)
             return face_array
         else:
-            return face_array, image
+            return face_array, image, face_final
 
     def detect_mouth(self, face_array, image):
         if face_array is None:
@@ -154,48 +159,6 @@ class FaceDetector:
                     break
             except:
                 pass
-            '''try:
-                if mouth_img[y_start - i, x_start + i] == 191:
-                    final_pos = (y_start - i, x_start + i)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start, x_start + i] == 191:
-                    final_pos = (y_start, x_start + i)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start + i, x_start + i] == 191:
-                    final_pos = (y_start + i, x_start + i)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start + i, x_start] == 191:
-                    final_pos = (y_start + i, x_start)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start + i, x_start - i] == 191:
-                    final_pos = (y_start + i, x_start - i)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start, x_start - i] == 191:
-                    final_pos = (y_start, x_start - i)
-                    break
-            except:
-                pass
-            try:
-                if mouth_img[y_start - i, x_start - i] == 191:
-                    final_pos = (y_start - i, x_start - i)
-                    break
-            except:
-                pass'''
         print(final_pos)
         self.fill_color(mouth_img, 127, final_pos)
         copy_mouth = mouth_img.copy()
@@ -229,23 +192,4 @@ class FaceDetector:
                     if mouth_right_point is None:
                         mouth_right_point = (right_x, y)
                         cv2.circle(mouth_img, mouth_right_point, 3, 0)
-        # 1st quarter
-        '''vertices = numpy.array(
-            [[top_point.x, top_point.y], [top_right_point.x, top_right_point.y], [right_point.x, right_point.y / 2]],
-            numpy.int32)
-        pts = vertices.reshape((-1, 1, 2))
-        cv2.polylines(mouth_img, [pts], isClosed=True, color=255, thickness=20)
-        cv2.fillPoly(mouth_img, [pts], color=255)
-
-        # 2nd quarter
-        vertices = numpy.array(
-            [[top_point.x, top_point.y], [top_left_point.x, top_left_point.y], [left_point.x, left_point.y / 2]],
-            numpy.int32)
-        pts = vertices.reshape((-1, 1, 2))
-        cv2.polylines(mouth_img, [pts], isClosed=True, color=255, thickness=20)
-        cv2.fillPoly(mouth_img, [pts], color=255)
-
-        cv2.drawContours(image, [numpy.ndarray([top_point.position(), top_left_point.position(), left_point.position()])], 0, 255, -1)
-        cv2.drawContours(image, [numpy.ndarray([bottom_point.position(), bottom_left_point.position(), left_point.position()])], 0, 255, -1)
-        cv2.drawContours(image, [numpy.ndarray([bottom_point.position(), bottom_right_point.position(), right_point.position()])], 0, 255, -1)'''
         return mouth_img, [Point(x_left, y_top), Point(x_right, y_bottom)]

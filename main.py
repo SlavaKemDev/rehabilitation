@@ -4,23 +4,17 @@ from FaceDetector import FaceDetector
 import os
 import sys
 from Geometry2D import *
-import time
 import threading
 import shutil
 import time
 from SymmetryEngine import SymmetryEngine
 
-def do_exc():
-    print("До начала выполнения 3", end="\r")
-    time.sleep(1)
-    print("До начала выполнения 2", end="\r")
-    time.sleep(1)
-    print("До начала выполнения 1", end="\r")
-    time.sleep(1)
-    print("Сделайте губы трубочкой")
-    time.sleep(5)
-    print("Оставьте губы в том же положении, но подуйте")
-    time.sleep(5)
+
+from exercises.TubeLips import TubeLips
+tubelips = TubeLips()
+from exercises.Smile import Smile
+smile = Smile()
+
 
 def play_sound(file):
     a = 1
@@ -59,18 +53,8 @@ fps = 2  # int(cap.get(5) / 1.5)
 frames = fps * 5
 exercises = [
     {
-        "name": "smile",
-        "text": "Smile!",
-        "time": 5
-    },
-    {
-        "name": "straw lips",
-        "text": "Make your lips in a straw",
-        "time": 5
-    },
-    {
-        "name": "a letter",
-        "text": "Say \"A\"",
+        "name": "test",
+        "text": "Test Exercise",
         "time": 5
     }
 ]
@@ -118,10 +102,19 @@ mouth_data = []
 for i in range(allFrames):
     exc = exercises[exerciseNumber]
     frame = cv2.imread(f"frames/frame{i}.png")
-    face_array, image = fd.detect(frame)
+    face_array, image, face_location = fd.detect(frame)
     if face_array is None:
         mouth_data.append(False)
         continue
+    x, y, w, h = face_location
+
+    # square landmarks
+    landmarks = []
+    for landmark in face_array["landmarks"]:
+        landmarks.append([landmark[0] - x, landmark[1] - y])
+    print(landmarks)
+
+    grayscale_img = cv2.cvtColor(frame[y:y+h, x:x+h], cv2.COLOR_BGR2GRAY)
     se.set_face_array(face_array)
     se.get_symmetry()
     mouth, points = fd.detect_mouth(face_array, frame)
@@ -129,6 +122,9 @@ for i in range(allFrames):
     mouth_symmetry = se.get_mouth_symmetry(mouth, points)
     mouth_data.append(mouth_symmetry)
     print("Рот: ", mouth_symmetry)
+    print("Трубочка: ", tubelips.load(landmarks))
+    print("Улыбка: ", smile.load(landmarks, grayscale_img))
+    cv2.imwrite("face.png", grayscale_img)
     left_border = Point(
         face_array["landmarks"][48][0],
         face_array["landmarks"][48][1]
@@ -184,5 +180,3 @@ elif mouth_result <= 0.8:
     print("Вам было бы неплохо выполнить профилактические упражнения")
 else:
     print("На вашем лице не обраружно искажений")
-
-do_exc()
