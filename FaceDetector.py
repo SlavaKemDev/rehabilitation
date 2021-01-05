@@ -1,15 +1,20 @@
 import cv2
 import numpy
 from Geometry2D import *
+import sys
+import os
 
 
 class FaceDetector:
-    def __init__(self):
-        self.detector = cv2.CascadeClassifier("cascades/frontal_face.xml")
-        self.mouth_detector = cv2.CascadeClassifier("cascades/mouth.xml")
+    def __init__(self, subfolders=0):
+        root_dir = os.path.dirname(__file__) + "/"
+        for i in range(subfolders):
+            root_dir += "../"
+        self.detector = cv2.CascadeClassifier(root_dir + "cascades/frontal_face.xml")
+        self.mouth_detector = cv2.CascadeClassifier(root_dir + "cascades/mouth.xml")
 
         self.landmark_detector = cv2.face.createFacemarkLBF()
-        self.landmark_detector.loadModel("cascades/lbf_model.yaml")
+        self.landmark_detector.loadModel(root_dir + "cascades/lbf_model.yaml")
 
     def fill_color(self, image, to_color, position):
         pos_y = position[0]
@@ -84,7 +89,7 @@ class FaceDetector:
                 face_final = face
                 max_face_size = face_size
         if max_face_size == 0:
-            return None, None
+            return None, None, None
         else:
             cv2.rectangle(image, (face_final[0], face_final[1]),
                           (face_final[0] + face_final[2], face_final[1] + face_final[3]), (255, 255, 255), 2)

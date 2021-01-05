@@ -6,7 +6,7 @@ class Smile:
     def __init__(self):
         self.smile = cv2.CascadeClassifier("cascades/smile.xml")
 
-    def load(self, points, image):
+    def load(self, points):
         top_point = Point(points[51][0], points[51][1])
         bottom_point = Point(points[57][0], points[57][1])
         left_point = Point(points[48][0], points[48][1])
